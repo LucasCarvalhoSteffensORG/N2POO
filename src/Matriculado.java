@@ -5,13 +5,13 @@ public class Matriculado  {
     private Aluno aluno;
     private Disciplina disciplina;
     private int ano;
-    private int Semestre;
+    private int semestre;
 
     public Matriculado(Aluno aluno, Disciplina disciplina, int ano, int semestre) {
         this.aluno = aluno;
         this.disciplina = disciplina;
         this.ano = ano;
-        Semestre = semestre;
+        this.semestre = semestre;
     }
 
     public Aluno getAluno() {
@@ -39,10 +39,10 @@ public class Matriculado  {
     }
 
     public int getSemestre() {
-        return Semestre;
+        return semestre;
     }
 
     public void setSemestre(int semestre) {
-        Semestre = semestre;
+        semestre = semestre;
     }
 }

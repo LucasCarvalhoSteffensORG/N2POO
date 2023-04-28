@@ -22,7 +22,7 @@ public class Curso {
         return disciplinas;
     }
 
-    
+
     public List<Aluno> obterAlunosDoCurso() {
         List<Aluno> alunosDoCurso = new ArrayList<>();
         for (Disciplina disciplina : disciplinas) {
@@ -45,7 +45,20 @@ public class Curso {
         }
         return disciplinasPorAluno;
     }
-
     public void matricularAlunoEmDisciplina(Aluno aluno, Disciplina disciplina, int ano, int semestre) {
+        // cria um objeto Matricula para registrar a matrícula do aluno na disciplina
+        Matriculado matricula = new Matriculado(aluno, disciplina, ano, semestre);
+
+        // adiciona a matrícula na lista de matrículas da disciplina
+        disciplina.adicionarMatriculado(matricula);
+
+        // adiciona a disciplina na lista de disciplinas do aluno
+        adicionarDisciplina(disciplina);
+
+        // adiciona o aluno na lista de alunos matriculados no curso
+        if (!obterAlunosDoCurso().contains(aluno)) {
+            obterAlunosDoCurso().add(aluno);
+        }
     }
+
 }
