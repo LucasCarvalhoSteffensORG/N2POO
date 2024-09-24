@@ -48,7 +48,7 @@ jobs:
           sonar-scanner --version
       
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradle build
       
       - name: Run SonarCloud analysis
         run: |
