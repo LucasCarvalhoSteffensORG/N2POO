@@ -3,7 +3,7 @@ name: SonarCloud
 on:
   push:
     branches:
-      - master  # Substitua pela branch que deseja monitorar
+      - maste  # Substitua pela branch que deseja monitorar
 
 jobs:
   sonarcloud:
