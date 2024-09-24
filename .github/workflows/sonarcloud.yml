@@ -3,7 +3,7 @@ name: SonarCloud
 on:
   push:
     branches:
-      - master  # Substitua pela branch que deseja monitorar
+      - main  # Substitua pela branch que deseja monitorar
 
 jobs:
   sonarcloud:
@@ -16,7 +16,7 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v1
         with:
-          java-version: '20'  # Substitua pela versão que você está usando
+          java-version: '11'  # Substitua pela versão que você está usando
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v2
@@ -26,10 +26,9 @@ jobs:
 
       - name: Install SonarCloud Scanner
         run: |
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
-          unzip sonar-scanner-cli-4.8.0.2856-linux.zip
-          mv sonar-scanner-4.8.0.2856-linux sonar-scanner
-          export PATH="$PATH:$PWD/sonar-scanner/bin"
+          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+          unzip sonar-scanner.zip -d $HOME
+          export PATH="$HOME/sonar-scanner-4.6.2.2472-linux/bin:$PATH"
 
       - name: Run SonarCloud analysis
         run: |
