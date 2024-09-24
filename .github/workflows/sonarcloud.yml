@@ -8,22 +8,29 @@ on:
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
+      
       - name: Setup Java JDK
         uses: actions/setup-java@v1
         with:
-          java-version: '10'  # Substitua pela versão que você está usando
-
+          java-version: '17'  # Substitua pela versão que você está usando
+      
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle
+      
       - name: Cache SonarCloud packages
         uses: actions/cache@v4
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
-
+      
       - name: Install SonarCloud Scanner
         run: |
           # Baixa e instala o SonarScanner
@@ -34,17 +41,19 @@ jobs:
           # Adiciona o SonarScanner ao PATH
           echo "Adicionando o SonarScanner ao PATH"
           echo "$HOME/sonar-scanner/bin" >> $GITHUB_PATH
-
+      
       - name: Verify SonarScanner installation
         run: |
           # Verifica se o sonar-scanner está disponível
           sonar-scanner --version
-
+      
+      - name: Build with Gradle
+        run: ./gradlew build
+      
       - name: Run SonarCloud analysis
         run: |
-          sonar-scanner \
+          ./gradlew sonarqube \
             -Dsonar.organization="lucascarvalhosteffens" \
             -Dsonar.projectKey="LucasCarvalhoSteffens_N2POO" \
-            -Dsonar.sources="." \
             -Dsonar.host.url="https://sonarcloud.io" \
             -Dsonar.login="${{ secrets.SONAR_TOKEN }}"
