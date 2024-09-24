@@ -16,7 +16,7 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v1
         with:
-          java-version: '11'  # Substitua pela versão que você está usando
+          java-version: '20'  # Substitua pela versão que você está usando
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v2
