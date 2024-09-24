@@ -47,8 +47,11 @@ jobs:
           # Verifica se o sonar-scanner está disponível
           sonar-scanner --version
       
+      - name: Grant execute permission for Gradle wrapper
+        run: chmod +x ./gradlew
+
       - name: Build with Gradle
-        run: ./gradle build
+        run: ./gradlew build
       
       - name: Run SonarCloud analysis
         run: |
