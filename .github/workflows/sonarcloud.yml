@@ -26,9 +26,19 @@ jobs:
 
       - name: Install SonarCloud Scanner
         run: |
-          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+          # Baixa e instala o SonarScanner
+          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
           unzip sonar-scanner.zip -d $HOME
-          export PATH="/home/runner/work "
+          mv $HOME/sonar-scanner-4.8.0.2856-linux $HOME/sonar-scanner
+          echo "SonarScanner instalado em: $HOME/sonar-scanner"
+          # Adiciona o SonarScanner ao PATH
+          echo "Adicionando o SonarScanner ao PATH"
+          echo "$HOME/sonar-scanner/bin" >> $GITHUB_PATH
+
+      - name: Verify SonarScanner installation
+        run: |
+          # Verifica se o sonar-scanner está disponível
+          sonar-scanner --version
 
       - name: Run SonarCloud analysis
         run: |
