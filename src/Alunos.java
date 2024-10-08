@@ -1,9 +1,9 @@
-public class Aluno extends Pessoa {
+public class Alunos extends Pessoa {
 
 
     private int matricula;
 
-    public Aluno(String nome, int matricula, String endereco, String telefone, String email) {
+    public Alunos(String nome, int matricula, String endereco, String telefone, String email) {
         super(nome, endereco, telefone, email);
         this.matricula = matricula;
     }
